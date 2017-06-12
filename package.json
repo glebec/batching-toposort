@@ -1,0 +1,60 @@
+{
+    "name": "batching-toposort",
+    "version": "1.0.0",
+    "description": "",
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "main": "dist/index.js",
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "build": "mkdir -p dist && babel src --out-dir dist && npm run prettify",
+        "test": "mocha \"./src/**/*.spec.js\"",
+        "test-watch": "npm test -- --watch",
+        "precommit": "./scripts/precommit && lint-staged",
+        "postcommit": "./scripts/postcommit",
+        "prepublishOnly": "npm t && npm run build",
+        "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
+        "lint": "esw --ext .js,.jsx --ignore-path .gitignore --cache --format node_modules/eslint-formatter-pretty",
+        "lint-watch": "npm run lint -- --watch"
+    },
+    "lint-staged": {
+        "*.{js,jsx}": [
+            "prettier --write",
+            "eslint --fix",
+            "git add"
+        ],
+        "*.{css,scss,json,md}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "author": "Gabriel Lebec <glebec@gmail.com> (https://github.com/glebec)",
+    "license": "MIT",
+    "homepage": "https://github.com/glebec/batching-toposort#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/glebec/batching-toposort"
+    },
+    "bugs": "https://github.com/glebec/batching-toposort/issues",
+    "dependencies": {},
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.3.3",
+        "@babel/preset-env": "^7.3.1",
+        "babel-eslint": "^8.2.2",
+        "chai": "^4.2.0",
+        "eslint": "^4.19.1",
+        "eslint-config-fullstack": "^5.0.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-formatter-pretty": "^1.1.0",
+        "eslint-plugin-react": "^7.7.0",
+        "eslint-watch": "^3.1.0",
+        "husky": "^0.13.4",
+        "lint-staged": "^7.3.0",
+        "mocha": "^6.0.1",
+        "prettier": "1.11.1"
+    }
+}

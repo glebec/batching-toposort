@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ -a .commit ]
+then
+	echo ".commit found, cleaning up"
+	rm .commit
+	# echo "running and adding build"
+	# git add lib
+	# git commit --amend -C HEAD --no-verify
+fi
+exit
