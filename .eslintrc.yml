@@ -1,6 +1,5 @@
 # YAML allows comments.
 root: true
-parser: babel-eslint
-extends: fullstack
+extends: [fullstack, prettier, prettier/react]
 rules:
-    semi: [1, never]
+    # semi: [1, never]
