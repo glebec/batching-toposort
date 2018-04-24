@@ -1,3 +1,6 @@
+# Precommit build flag hack
+.commit
+
 # Build
 build
 dist
