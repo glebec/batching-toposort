@@ -1,3 +1,9 @@
+## WORK-IN-PROGRESS
+
+This module is not published on npm yet; consider this README a draft.
+
+---
+
 # Batching Toposort
 
 ```hs
