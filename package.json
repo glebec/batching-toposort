@@ -1,5 +1,5 @@
 {
-	"name": "_REPLACE_SPRINGBOARD_NAME_",
+	"name": "batching-toposort",
 	"version": "1.0.0",
 	"description": "",
 	"engines": {
@@ -7,7 +7,7 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "mocha \"./src/**/*.spec.js\"",
 		"precommit": "./scripts/precommit && lint-staged",
 		"postcommit": "./scripts/postcommit",
 		"prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
@@ -38,6 +38,7 @@
 	"dependencies": {},
 	"devDependencies": {
 		"babel-eslint": "^8.2.2",
+		"chai": "^4.2.0",
 		"cross-env": "^5.0.1",
 		"eslint": "^4.19.1",
 		"eslint-config-fullstack": "^5.0.0",
@@ -46,7 +47,8 @@
 		"eslint-plugin-react": "^7.7.0",
 		"eslint-watch": "^3.1.0",
 		"husky": "^0.13.4",
-		"lint-staged": "^7.0.4",
+		"lint-staged": "^7.3.0",
+		"mocha": "^6.0.1",
 		"nodemon": "^1.11.0",
 		"prettier": "1.11.1"
 	}

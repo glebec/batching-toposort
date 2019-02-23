@@ -1,6 +1,6 @@
 # printWidth: 80 # 80
 # tabWidth: 4 # 2
-# useTabs: true # false
+# useTabs: false # false
 semi: false # true
 singleQuote: true # false
 trailingComma: es5 # none | es5 | all

@@ -1,5 +1,5 @@
 # YAML allows comments.
 root: true
 extends: [fullstack, prettier, prettier/react]
-# rules:
-#     semi: [1, never]
+rules:
+    id-length: 0
