@@ -21,7 +21,7 @@ const invertDAG = dag => {
     return newDAG
 }
 
-// :: Object -> Object
+// :: (Object a, (a -> b)) -> Object b
 const mapObjVals = (obj, fn) =>
     fromEntries(Object.entries(obj).map(([k, v]) => [k, fn(v)]))
 
