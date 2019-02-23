@@ -13,8 +13,7 @@
 		"prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
 		"prepush": "echo \"Please configure the prepush script\"",
 		"lint": "esw --ext .js,.jsx --ignore-path .gitignore --cache --format node_modules/eslint-formatter-pretty",
-		"lint-watch": "npm run lint -- --watch",
-		"dev": "cross-env NODE_ENV=development echo \"Please add a dev script\""
+		"lint-watch": "npm run lint -- --watch"
 	},
 	"lint-staged": {
 		"*.{js,jsx}": [
@@ -39,7 +38,6 @@
 	"devDependencies": {
 		"babel-eslint": "^8.2.2",
 		"chai": "^4.2.0",
-		"cross-env": "^5.0.1",
 		"eslint": "^4.19.1",
 		"eslint-config-fullstack": "^5.0.0",
 		"eslint-config-prettier": "^2.9.0",
