@@ -7,7 +7,8 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"test": "mocha \"./src/**/*.spec.js\"",
+        "test": "mocha \"./src/**/*.spec.js\"",
+        "test-watch": "npm test -- --watch",
 		"precommit": "./scripts/precommit && lint-staged",
 		"postcommit": "./scripts/postcommit",
 		"prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
