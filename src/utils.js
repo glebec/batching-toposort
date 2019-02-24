@@ -3,11 +3,11 @@
 // :: DAG -> { TaskId: Number }
 const countInDegrees = dag => {
     const counts = {}
-    Object.entries(dag).forEach(([vx, deps]) => {
+    Object.entries(dag).forEach(([vx, dependents]) => {
         counts[vx] = counts[vx] || 0
-        deps.forEach(dep => {
-            counts[dep] = counts[dep] || 0
-            counts[dep]++
+        dependents.forEach(dependent => {
+            counts[dependent] = counts[dependent] || 0
+            counts[dependent]++
         })
     })
     return counts
