@@ -1,9 +1,3 @@
-## WORK-IN-PROGRESS
-
-This module is not published on npm yet; consider this README a draft.
-
----
-
 # Batching-Toposort
 
 Efficiently sort interdependent tasks into a sequence of concurrently-executable batches.
