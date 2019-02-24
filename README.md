@@ -29,6 +29,8 @@ npm install batching-toposort
 
 Batching-Toposort expects a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) implemented via [adjacency list](https://en.wikipedia.org/wiki/Adjacency_list). In other words, construct an object whose keys are dependency IDs, and whose values are lists of dependent IDs.
 
+<img width="250" src="images/graph.png">
+
 ```js
 const batchingToposort = require('batching-toposort')
 
