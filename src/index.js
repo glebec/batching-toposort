@@ -8,6 +8,12 @@ const getRoots = counts =>
         .filter(([_, deg]) => deg === 0)
         .map(([id, _]) => id)
 
+// { String: Number } -> [String]
+const getNonRoots = counts =>
+    Object.entries(counts)
+        .filter(([_, deg]) => deg !== 0)
+        .map(([id, _]) => id)
+
 // { dependencyId: dependentId } -> [[taskId]]
 const batchingToposort = dag => {
     const indegrees = countInDegrees(dag)
@@ -29,6 +35,10 @@ const batchingToposort = dag => {
         })
 
         roots = newRoots
+    }
+
+    if (getNonRoots(indegrees).length) {
+        throw Error('Cycle(s) detected; toposort only works on acyclic graphs')
     }
 
     return sorted
