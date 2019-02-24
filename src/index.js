@@ -9,7 +9,7 @@ const getRoots = counts =>
         .map(([id, _]) => id)
 
 // { dependencyId: dependentId } -> [[taskId]]
-function batchingToposort(dag) {
+const batchingToposort = dag => {
     const indegrees = countInDegrees(dag)
     const sorted = []
 
