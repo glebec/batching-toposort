@@ -13,11 +13,9 @@ function batchingToposort(dag) {
     const indegrees = countInDegrees(dag)
     const sorted = []
 
-    return solve(getRoots(indegrees))
+    let roots = getRoots(indegrees)
 
-    function solve(roots) {
-        if (!roots.length) return sorted
-
+    while (roots.length) {
         sorted.push(roots)
 
         const newRoots = []
@@ -30,8 +28,10 @@ function batchingToposort(dag) {
             })
         })
 
-        return solve(newRoots)
+        roots = newRoots
     }
+
+    return sorted
 }
 
 module.exports = batchingToposort
