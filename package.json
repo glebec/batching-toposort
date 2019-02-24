@@ -33,12 +33,12 @@
     },
     "author": "Gabriel Lebec <glebec@gmail.com> (https://github.com/glebec)",
     "license": "MIT",
-    "homepage": "https://github.com/glebec/springboard#readme",
+    "homepage": "https://github.com/glebec/batching-toposort#readme",
     "repository": {
         "type": "git",
-        "url": "https://github.com/glebec/springboard"
+        "url": "https://github.com/glebec/batching-toposort"
     },
-    "bugs": "https://github.com/glebec/springboard/issues",
+    "bugs": "https://github.com/glebec/batching-toposort/issues",
     "dependencies": {},
     "devDependencies": {
         "@babel/cli": "^7.2.3",
