@@ -27,9 +27,9 @@ Often one needs to schedule interdependent tasks. In order to determine task ord
 npm install batching-toposort
 ```
 
-Batching-Toposort expects a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) implemented via [adjacency list](https://en.wikipedia.org/wiki/Adjacency_list). In other words, construct an object whose keys are dependency IDs, and whose values are lists of dependent IDs.
+<img align="right" width="250" src="images/graph.png">
 
-<img width="250" src="images/graph.png">
+Batching-Toposort expects a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG) implemented via [adjacency list](https://en.wikipedia.org/wiki/Adjacency_list). In other words, construct an object whose keys are dependency IDs, and whose values are lists of dependent IDs.
 
 ```js
 const batchingToposort = require('batching-toposort')
