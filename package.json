@@ -12,7 +12,6 @@
         "precommit": "./scripts/precommit && lint-staged",
         "postcommit": "./scripts/postcommit",
         "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
-        "prepush": "echo \"Please configure the prepush script\"",
         "lint": "esw --ext .js,.jsx --ignore-path .gitignore --cache --format node_modules/eslint-formatter-pretty",
         "lint-watch": "npm run lint -- --watch"
     },
