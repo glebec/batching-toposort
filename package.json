@@ -5,12 +5,14 @@
     "engines": {
         "node": ">=8.0.0"
     },
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
+        "build": "mkdir -p dist && babel src/index.js -o dist/index.js",
         "test": "mocha \"./src/**/*.spec.js\"",
         "test-watch": "npm test -- --watch",
         "precommit": "./scripts/precommit && lint-staged",
         "postcommit": "./scripts/postcommit",
+        "prepublishOnly": "npm run build",
         "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
         "lint": "esw --ext .js,.jsx --ignore-path .gitignore --cache --format node_modules/eslint-formatter-pretty",
         "lint-watch": "npm run lint -- --watch"
@@ -36,6 +38,8 @@
     "bugs": "https://github.com/glebec/springboard/issues",
     "dependencies": {},
     "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.3.3",
         "babel-eslint": "^8.2.2",
         "chai": "^4.2.0",
         "eslint": "^4.19.1",
