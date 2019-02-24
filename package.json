@@ -15,7 +15,7 @@
         "test-watch": "npm test -- --watch",
         "precommit": "./scripts/precommit && lint-staged",
         "postcommit": "./scripts/postcommit",
-        "prepublishOnly": "npm run build",
+        "prepublishOnly": "npm t && npm run build",
         "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
         "lint": "esw --ext .js,.jsx --ignore-path .gitignore --cache --format node_modules/eslint-formatter-pretty",
         "lint-watch": "npm run lint -- --watch"
