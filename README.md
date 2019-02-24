@@ -16,6 +16,7 @@ batchingToposort :: { DependencyId : [DependentId] } -> [[TaskId]]
 *   `O(t)` space complexity
 *   Zero package dependencies
 *   Thoroughly tested
+*   Errors on cyclic graphs
 
 ## Motivation
 
