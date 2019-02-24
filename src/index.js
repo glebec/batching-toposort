@@ -1,6 +1,6 @@
 'use strict'
 
-const { invertDAG, mapObjVals } = require('./utils')
+const { countInDegrees } = require('./utils')
 
 // { String: Number } -> [String]
 const getRoots = counts =>
@@ -10,7 +10,7 @@ const getRoots = counts =>
 
 // { dependencyId: dependentId } -> [[taskId]]
 function batchingToposort(dag) {
-    const indegrees = mapObjVals(invertDAG(dag), vxs => vxs.length)
+    const indegrees = countInDegrees(dag)
     const sorted = []
 
     return solve(getRoots(indegrees))
