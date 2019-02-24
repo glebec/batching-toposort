@@ -50,4 +50,30 @@ describe('batchingToposort', () => {
             ['i', 'j'],
         ])
     })
+
+    it('errors on a small cyclic graph', () => {
+        const dg = {
+            a: ['b'],
+            b: ['a'],
+            c: [],
+        }
+        const sortCyclicGraph = () => {
+            batchingToposort(dg)
+        }
+        expect(sortCyclicGraph).to.throw(Error)
+    })
+
+    it('errors on a larger cyclic graph', () => {
+        const dg = {
+            a: ['b', 'c'],
+            b: ['c'],
+            c: ['d', 'e'],
+            d: ['b'],
+            e: [],
+        }
+        const sortCyclicGraph = () => {
+            batchingToposort(dg)
+        }
+        expect(sortCyclicGraph).to.throw(Error)
+    })
 })
