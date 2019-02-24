@@ -7,7 +7,7 @@
     },
     "main": "dist/index.js",
     "files": [
-        "dist/**/*.js"
+        "dist/**/*"
     ],
     "scripts": {
         "build": "mkdir -p dist && babel src --out-dir dist && npm run prettify",
