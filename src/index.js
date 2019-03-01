@@ -1,18 +1,6 @@
 'use strict'
 
-const { countInDegrees } = require('./utils')
-
-// :: (Number -> Bool) -> { String: Number } -> [String]
-const filterByDegree = predicate => counts =>
-    Object.entries(counts)
-        .filter(([_, deg]) => predicate(deg))
-        .map(([id, _]) => id)
-
-// :: { String: Number } -> [String]
-const getRoots = filterByDegree(deg => deg === 0)
-
-// :: { String: Number } -> [String]
-const getNonRoots = filterByDegree(deg => deg !== 0)
+const { countInDegrees, getRoots, getNonRoots } = require('./utils')
 
 // :: { dependencyId: dependentId } -> [[taskId]]
 const batchingToposort = dag => {
