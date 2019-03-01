@@ -2,17 +2,17 @@
 
 const { countInDegrees } = require('./utils')
 
-// { String: Number } -> [String]
-const getRoots = counts =>
+// :: (Number -> Bool) -> { String: Number } -> [String]
+const filterByDegree = predicate => counts =>
     Object.entries(counts)
-        .filter(([_, deg]) => deg === 0)
+        .filter(([_, deg]) => predicate(deg))
         .map(([id, _]) => id)
 
 // { String: Number } -> [String]
-const getNonRoots = counts =>
-    Object.entries(counts)
-        .filter(([_, deg]) => deg !== 0)
-        .map(([id, _]) => id)
+const getRoots = filterByDegree(deg => deg === 0)
+
+// { String: Number } -> [String]
+const getNonRoots = filterByDegree(deg => deg !== 0)
 
 // { dependencyId: dependentId } -> [[taskId]]
 const batchingToposort = dag => {
