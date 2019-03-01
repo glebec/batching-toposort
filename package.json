@@ -1,7 +1,17 @@
 {
     "name": "batching-toposort",
     "version": "1.0.0",
-    "description": "",
+    "description": "Efficiently sort interdependent tasks into a sequence of concurrently-executable batches.",
+    "keywords": [
+        "toposort",
+        "concurrency",
+        "algorithm",
+        "dag",
+        "digraph",
+        "directed acyclic graph",
+        "graph",
+        "sort"
+    ],
     "engines": {
         "node": ">=8.0.0"
     },
