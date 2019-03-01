@@ -8,13 +8,13 @@ const filterByDegree = predicate => counts =>
         .filter(([_, deg]) => predicate(deg))
         .map(([id, _]) => id)
 
-// { String: Number } -> [String]
+// :: { String: Number } -> [String]
 const getRoots = filterByDegree(deg => deg === 0)
 
-// { String: Number } -> [String]
+// :: { String: Number } -> [String]
 const getNonRoots = filterByDegree(deg => deg !== 0)
 
-// { dependencyId: dependentId } -> [[taskId]]
+// :: { dependencyId: dependentId } -> [[taskId]]
 const batchingToposort = dag => {
     const indegrees = countInDegrees(dag)
     const sorted = []
