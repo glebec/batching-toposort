@@ -1,6 +1,7 @@
 'use strict'
 
 const { expect } = require('chai')
+const jsc = require('jsverify')
 
 const batchingToposort = require('./index')
 
@@ -75,5 +76,114 @@ describe('batchingToposort', () => {
             batchingToposort(dg)
         }
         expect(sortCyclicGraph).to.throw(Error)
+    })
+
+    describe('properties:', () => {
+        // Helpers
+        const {
+            constant: pure,
+            tuple: tupleGen,
+            array: arrayGen,
+        } = jsc.generator
+        const boolGen = jsc.bool.generator
+        const nestringGen = jsc.nestring.generator
+
+        // :: (Int, Generator a) -> Generator [a]
+        const replicate = (n, g) =>
+            n === 0
+                ? pure([]) // `tuple` cannot be empty
+                : tupleGen(Array(n).fill(g))
+
+        // :: [a] -> [a]
+        const dedupe = arr => [...new Set(arr)]
+
+        // :: Generator NonEmptyString
+        const idGen = arrayGen(nestringGen).map(dedupe)
+
+        // :: (String, DAG) -> DAG
+        const removeVx = (rmId, dag) =>
+            Object.entries(dag).reduce((newDag, [id, deps]) => {
+                if (id !== rmId) newDag[id] = deps.filter(dep => dep !== rmId)
+                return newDag
+            }, {})
+
+        // :: (String, String, Dag) -> Dag
+        const removeEdge = (edgeStart, edgeEnd, dag) =>
+            Object.entries(dag).reduce((newDag, [id, deps]) => {
+                newDag[id] = deps.filter(
+                    dep => !(id === edgeStart && dep === edgeEnd)
+                )
+            }, {})
+
+        // "environment" of arbitrary instances
+        const env = {
+            dag: jsc.bless({
+                generator: idGen.flatmap(vertexIds => {
+                    const numVxs = vertexIds.length
+                    const numEdges = numVxs * (numVxs - 1) / 2
+                    return replicate(numEdges, boolGen).flatmap(edgeBools => {
+                        const dag = {}
+                        let edgeIdx = 0
+                        for (let vx = 0; vx < numVxs; vx++) {
+                            const vxId = vertexIds[vx]
+                            dag[vxId] = dag[vxId] || []
+                            for (let dep = vx + 1; dep < numVxs; dep++) {
+                                const dependentId = vertexIds[dep]
+                                const useEdge = edgeBools[edgeIdx++]
+                                if (useEdge) dag[vxId].push(dependentId)
+                            }
+                        }
+                        return pure(dag)
+                    })
+                }),
+                shrink: jsc.shrink.bless(dag => {
+                    const dags = []
+                    Object.entries(dag).forEach((id, deps) => {
+                        dags.push(removeVx(id, dag))
+                        deps.forEach(dep => {
+                            dags.push(removeEdge(id, dep, dag))
+                        })
+                    })
+                    return dags
+                }),
+                show: a => JSON.stringify(a),
+            }),
+        }
+
+        const opts= {
+            tests: 300,
+            size: 200
+        }
+
+        it('DAGs sort without error', () => {
+            jsc.assert(jsc.forall('dag', env, dag => {
+                batchingToposort(dag)
+                return true
+            }), opts)
+        })
+
+        it('toposorted DAGs do not lose tasks', () => {
+            jsc.assert(jsc.forall('dag', env, dag => {
+                const sorted = batchingToposort(dag)
+                const flattened = [].concat.apply([], sorted)
+                return flattened.length === Object.keys(dag).length
+            }), opts)
+        })
+
+        it('toposorted DAGs contain no empty sublists', () => {
+            jsc.assert(jsc.forall('dag', env, dag => {
+                const sorted = batchingToposort(dag)
+                return !sorted.some(sublist => !sublist.length)
+            }), opts)
+        })
+
+        it('toposort is externally pure', () => {
+            jsc.assert(jsc.forall('dag', env, dag => {
+                Object.values(dag).forEach(list => Object.freeze(list))
+                Object.freeze(dag)
+                batchingToposort(dag)
+                return true
+            }), opts)
+        })
     })
 })
