@@ -13,7 +13,7 @@ batchingToposort :: { DependencyId : [DependentId] } -> [[TaskId]]
 *   `O(t + d)` time complexity (for `t` tasks and `d` dependency relationships)
 *   `O(t)` space complexity
 *   Zero package dependencies
-*   Thoroughly tested
+*   Thoroughly tested (including [invariant tests](http://jsverify.github.io/#property-based-testing))
 *   Errors on cyclic graphs
 
 ## Motivation
